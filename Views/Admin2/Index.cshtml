@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ProjectIRIMIA.Models.Category>
+
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Categories</h1>
+
+
+
+<a asp-action="Create" class="btn btn-primary mb-3">Create New Category</a>
+
+<table class="table table-striped table-bordered table-sm">
+    <thead>
+        <tr>
+            <th>CategoryName</th>
+            <th>DateCreation</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Category p in Model)
+        {
+            <tr>
+                <td>@p.CategoryName</td>
+                <td>@p.DateCreation</td>
+                
+                <td>
+                <a asp-action="Edit" asp-route-id="@p.CategoryId">Edit</a> 
+                <a asp-action="Details" asp-route-id="@p.CategoryId">Details</a> 
+                <a asp-action="Delete" asp-route-id="@p.CategoryId">Delete</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

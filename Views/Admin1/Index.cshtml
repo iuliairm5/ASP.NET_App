@@ -1,0 +1,111 @@
+﻿@model IEnumerable<ProjectIRIMIA.Models.Product>
+
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Products</h1>
+@*
+<a asp-action="Create">Create New</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.category)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrentDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.category.CategoryName)
+            </td>
+            
+            <a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a>
+            <a asp-action="Details" asp-route-id="@item.ProductId">Details</a>
+             <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
+            
+             @if (User.IsInRole("DeleteProductsRole")) 
+                    {
+
+                        <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
+                    }
+            @if (User.IsInRole("CreateAndEditData")) 
+                    {
+                        
+                        
+
+                        <a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a>
+
+                    }
+            @if (User.IsInRole("ReadData")) 
+                    {
+
+                        <a asp-action="Details" asp-route-id="@item.ProductId">Details</a>
+                    }
+
+
+        </tr>
+}
+    </tbody>
+</table>
+*@
+
+
+<a asp-action="Create" class="btn btn-primary mb-3">Create New Product</a>
+
+<table class="table table-striped table-bordered table-sm">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>CurrentDate</th>
+            <th>category</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Product p in Model)
+        {
+            <tr>
+                <td>@p.Title</td>
+                <td>@p.Author</td>
+                <td>@p.CurrentDate</td>
+                 <td>@p.category.CategoryName</td>
+                <td>
+                <a asp-action="Edit" asp-route-id="@p.ProductId">Edit</a> 
+                <a asp-action="Details" asp-route-id="@p.ProductId">Details</a> 
+                <a asp-action="Delete" asp-route-id="@p.ProductId">Delete</a>
+
+                    @*@if (User.IsInRole("DeleteProductsRole"))
+                    {
+                      
+                        <a asp-action="Delete" asp-route-id="@p.ProductId">Delete</a>
+
+                    }
+                    *@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
